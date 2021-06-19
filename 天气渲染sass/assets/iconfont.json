@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3755875",
+      "name": "云",
+      "font_class": "yun",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "8688599",
+      "name": "阴",
+      "font_class": "yin",
+      "unicode": "e6e7",
+      "unicode_decimal": 59111
+    },
+    {
+      "icon_id": "9277848",
+      "name": "雷电",
+      "font_class": "leidian",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "11091467",
+      "name": "晴",
+      "font_class": "qing",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "17922584",
+      "name": "雨",
+      "font_class": "rain",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天气渲染sass</title>
+    <link rel="stylesheet" href="./css/weather.css">
+</head>
+
+<body>
+    <div id="weather"></div>
+</body>
+
+</html>
+<script src="./js/weather.js"></script>
+<script src="./assets/iconfont.js"></script>
+<script>
+    let weather = document.querySelector("#weather")
+
+    //封装
+    function bindHtml(arr) {
+        let html = ""
+        arr.forEach(item => {
+            html += ` 
+            <div id="weather-container">
+            <div class="city">${item.city}</div>
+            <div class="weather-date">
+            <span>${item.date}</span>
+            <span>${item.week}</span>
+            <p><svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-${item.wea_img}"></use></svg></p></div>
+            <div class="weather-degree">
+            <div class="weather-degree-left">${item.tem}</div>
+            <div class="weather-degree-right">
+                <span>℃</span>
+                <span>${item.wea}</span>
+            </div>
+        </div>
+        
+        <div class="weather-meaasge">
+            <p class="weather-meaasge-tem">最低温度~最高温度：${item.tem2}~${item.tem1}℃</p>
+            <p class="weather-meaasge-wind">风速：${item.win} ${item.win_speed}</p>
+            <p class="weather-meaasge-air">空气质量:${item.air} ${item.air_level}</p>
+        </div>
+    </div>`
+        })
+        //一定要return 否则页面内容undefined
+        return html;
+    }
+
+    ajax({
+        url: "http://chst.vip/weather/getWeather?key=all"
+    }).then(res => {
+        console.log(JSON.parse(res).data.splice(0,20));
+        let arr = JSON.parse(res).data.splice(0,20)
+        let html = bindHtml(arr)
+        weather.innerHTML = html
+
+        //懒加载
+        let count = 6;
+        window.onscroll = function () {
+            let height = document.documentElement.scrollHeight
+            let top = document.documentElement.scrollTop
+            let client = document.documentElement.clientHeight
+            let value = height - (top + client)
+            if (value < 80) {
+                count += 6;
+                if (count > res.data.length) {
+                    return
+                }
+                let arr = res.data.splice(0, count)
+                let html = bindHtml(arr)
+                weather.innerHTML = html
+            }
+        }
+    })
+</script>
